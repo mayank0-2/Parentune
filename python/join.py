@@ -11,7 +11,6 @@ mysql = SQLAlchemy(app)
 @app.route('/', methods=['GET'])
 def data () :
     if request.method == 'GET':
-        school_id = request.args.get('schoolId')
         query = f"SELECT plus_pre_schoolss.school_name ,plus_pre_schoolss.address, plus_pre_schoolss.city, plus_pre_schools_detail.contact_number, plus_pre_schools_detail.website, plus_pre_schools_detail.map_url FROM plus_pre_schoolss INNER JOIN plus_pre_schools_detail on plus_pre_schoolss.id = plus_pre_schools_detail.schoolID WHERE plus_pre_schools_detail.schoolId"
         data = [dict(row) for row in mysql.engine.execute(query).fetchall()]
         return {"data" : data}
